@@ -202,7 +202,6 @@ Note：passwd为字符串类型，初始值为空：\r\n\r\n\r\nOK\r\n        �
 
 5856Q32_codec_release_flash_20170414.rar
 
-
 5856主要改动：
 1）大版本升级，基础代码从2016.11版本升级到2017.04版本。
 2）解决部分MP3开头没有播出来问题
@@ -216,3 +215,101 @@ Note：passwd为字符串类型，初始值为空：\r\n\r\n\r\nOK\r\n        �
 上电：5856默认进入CODEC模式，等56回复\r\nCODEC_READY\r\n后codec可以工作。
 切换CODEC模式：发送AT+CMODE=UART_PLAY\r\n，等56回复\r\nOK\r\n后，指令执行成功，再等56回复\r\nCODEC_READY\r\n后，方可开始工作。
 切换BT模式：发送AT+CMODE=BT\r\n，等56回复\r\nOK\r\n后，说明切换成功。
+
+
+
+
+5856T_nolcd_release_flash_20170328.rar
+
+5856主要改动：
+1）解决CME ERROR: 50错误问题
+2）调整codec rx buffer size
+
+5991程序改为smartconfig联网模式
+
+
+5856T_nolcd_release_flash_20170325.rar
+
+主要改动：
+1）解决音乐播放过程中codec重启问题
+2）软件控制外部Audio PA开关
+3）增加获取codec播放状态的AT指令：AT+MUGETSTATUS  // 0：STOP， 1：PLAY， 2：PAUSE
+
+
+TinyDu_U02_HF_20170324.rar
+
+汉枫板子5981 U02测试程序：TinyDu_U02_HF_20170324.rar
+Note：基于百度效率云20170324 版本出的测试程序
+
+
+TinyDu_U02_HF_20170321.rar
+
+汉枫板子5981 U02测试程序：TinyDu_U02_HF_20170321.rar
+RDA开发板5981 U02测试程序：TinyDu_U02_20170321.rar
+Note：基于百度效率云20170321 18:50 版本出的测试程序
+
+
+5856T_nolcd_release_flash_20170321.rar
+
+主要改动：
+1）录音采样率改为8K
+2）根据需求，91发送stopPlay(WITH_ENDING)后立即返回OK
+Note：91 U01版芯片使用效率云0321版本验证WIFI连接、语音识别和歌曲播放正常。
+
+
+
+5856T_nolcd_release_flash_20170308_2.rar
+
+
+在5856出来稳定的版本之前，麻烦各位都使用0308_2的版本。
+这个版本录音效果没问题。
+
+
+
+5856T_nolcd_release_flash_20170317.zip
+
+
+主要改动：1）完善工厂测试模式Codec自动测试AT指令：AT+FTCODEC=<mode>  // mode: 1-enable, 0-disable，返回OK即表示成功
+
+2）增加版本查询指令 AT+CVERSION      //返回格式 CHIPID,SW_VERSION,BUILDTIME
+3）16KHz 录音问题修复（待验证）
+
+rda5856_player_hanfeng_20170311.rar
+
+
+汉枫板子测试程序：
+百度云测试程序：baidu_iot_hanfeng_20170310.rar    // ssid: splendid    password: 43214321
+T卡播放测试程序：rda5856_player_hanfeng_20170311.rar
+Note：基于百度效率云20170310版本出的测试程序
+
+
+rda5856_player_20170310.rar
+
+RDA5991H_HDK_V1.0 板子测试程序：
+百度云测试程序：baidu_iot_20170310.rar    // ssid: splendid    password: 43214321
+T卡播放测试程序：rda5856_player_20170310.rar
+Note：基于百度效率云20170310版本出的测试程序
+
+
+5856Q32_codec_release_flash_20170503.rar
+
+测试BLE临时版本，5856主要改动：
+1. 增加BLE支持，通过BLE实现WIFI配网功能按如下操作：
+1）进入BT（BR）模式：AT+CMODE=BT
+2)  进入LE模式：AT+BTSWITCH=1  // 1：进入LE模式，0：进入BR模式。 返回：\r\nOK\r\n
+3）开启wifi配网服务：AT+LESWIFISCS  // 返回：\r\nOK\r\n
+4）获取AP name：AT+LEGETSSID  // 返回：\r\n<ssid>\r\n\r\nOK\r\n        
+Note:  ssid为字符串类型，初始值为空：\r\n\r\n\r\nOK\r\n ，通过LE写入后返回对应的值。
+5）获取AP password：AT+LEGETPASSWD  // 返回：\r\n<passwd>\r\n\r\nOK\r\n
+Note：passwd为字符串类型，初始值为空：\r\n\r\n\r\nOK\r\n        ，通过LE写入后返回对应的值。
+
+2. 优化音乐播放流程
+
+5856T_nolcd_release_flash_20170310.rar
+
+5856T_nolcd_release_flash_20170310.rar
+主要改动：
+1）解决数据传输过程中触发按键中断时程序重启/音乐停止播放等问题；
+2）增加MIC增益设置AT指令：AT+MUSETMICGAIN=<gain_value> // gain_value: 0 ~ 7
+3）增加音乐播放暂停/恢复AT指令：AT+MUPAUSE，AT+MURESUME
+4）增加工厂测试模式Codec自动测试AT指令：AT+FTCODEC=<mode>  // mode: 1-enable, 0-disable
